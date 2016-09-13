@@ -14,7 +14,7 @@ See <http://creativecommons.org/publicdomain/zero/1.0/>. */
 
    It is a very fast generator passing BigCrush, and it can be useful if
    for some reason you absolutely want 64 bits of state; otherwise, we
-   rather suggest to use a xorshift128+ (for moderately parallel
+   rather suggest to use a xoroshiro128+ (for moderately parallel
    computations) or xorshift1024* (for massively parallel computations)
    generator. */
 

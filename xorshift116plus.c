@@ -1,4 +1,4 @@
-/* Written in 2014-2015 by Sebastiano Vigna (vigna@acm.org) and 
+/* Written in 2014 by Sebastiano Vigna (vigna@acm.org) and 
    Kenji Rikitake (kenji.rikitake@acm.org).
 
 To the extent possible under law, the author has dedicated all copyright
@@ -18,6 +18,10 @@ See <http://creativecommons.org/publicdomain/zero/1.0/>. */
    This generator passes BigCrush without systematic failures, but due to
    the relatively short period it is acceptable only for applications with
    a mild amount of parallelism; otherwise, use a xorshift1024* generator.
+
+   Note that the lowest bit of this generator is an LSFR, and thus it is
+   slightly less random than the other bits. We suggest to use a sign test
+   to extract a random Boolean value.
 
    The state must be seeded so that the lower 58 bits of s[0] and s[1]
    are not all zeroes, and the upper 6 bits are zeroes. If you have a
@@ -42,8 +46,8 @@ uint64_t next(void) {
    to 2^64 calls to next(); it can be used to generate 2^52
    non-overlapping subsequences for parallel computations. */
 
-void jump() {
-	static const uint64_t JUMP[] = { 0x302f8ea6bc32c797ULL, 0x000d174a83e17de2ULL };
+void jump(void) {
+	static const uint64_t JUMP[] = { 0x302f8ea6bc32c797, 0x000d174a83e17de2 };
 
 	uint64_t s0 = 0;
 	uint64_t s1 = 0;

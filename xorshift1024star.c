@@ -1,4 +1,4 @@
-/*  Written in 2014-2015 by Sebastiano Vigna (vigna@acm.org)
+/*  Written in 2014 by Sebastiano Vigna (vigna@acm.org)
 
 To the extent possible under law, the author has dedicated all copyright
 and related and neighboring rights to this software to the public domain
@@ -10,7 +10,11 @@ See <http://creativecommons.org/publicdomain/zero/1.0/>. */
 #include <string.h>
 
 /* This is a fast, top-quality generator. If 1024 bits of state are too
-   much, try a xorshift128+ generator.
+   much, try a xoroshiro128+ generator.
+
+   Note that the three lowest bits of this generator are LSFRs, and thus
+   they are slightly less random than the other bits. We suggest to use a
+   sign test to extract a random Boolean value.
 
    The state must be seeded so that it is not everywhere zero. If you have
    a 64-bit seed, we suggest to seed a splitmix64 generator and use its
@@ -32,13 +36,13 @@ uint64_t next(void) {
    to 2^512 calls to next(); it can be used to generate 2^512
    non-overlapping subsequences for parallel computations. */
 
-void jump() {
-	static const uint64_t JUMP[] = { 0x84242f96eca9c41dULL,
-		0xa3c65b8776f96855ULL, 0x5b34a39f070b5837ULL, 0x4489affce4f31a1eULL,
-		0x2ffeeb0a48316f40ULL, 0xdc2d9891fe68c022ULL, 0x3659132bb12fea70ULL,
-		0xaac17d8efa43cab8ULL, 0xc4cb815590989b13ULL, 0x5ee975283d71c93bULL,
-		0x691548c86c1bd540ULL, 0x7910c41d10a1e6a5ULL, 0x0b5fc64563b3e2a8ULL,
-		0x047f7684e9fc949dULL, 0xb99181f2d8f685caULL, 0x284600e3f30e38c3ULL
+void jump(void) {
+	static const uint64_t JUMP[] = { 0x84242f96eca9c41d,
+		0xa3c65b8776f96855, 0x5b34a39f070b5837, 0x4489affce4f31a1e,
+		0x2ffeeb0a48316f40, 0xdc2d9891fe68c022, 0x3659132bb12fea70,
+		0xaac17d8efa43cab8, 0xc4cb815590989b13, 0x5ee975283d71c93b,
+		0x691548c86c1bd540, 0x7910c41d10a1e6a5, 0x0b5fc64563b3e2a8,
+		0x047f7684e9fc949d, 0xb99181f2d8f685ca, 0x284600e3f30e38c3
 	};
 
 	uint64_t t[16] = { 0 };

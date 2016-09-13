@@ -6,6 +6,7 @@
 
 * Tag `original-20150905` contains Xorshift64\* and Xorshift4096\* code, later removed by the author.
 * Tag `original-20160106` contains SplitMix64 code, and *revised* Xorshift128+ code.
+* Tag `original-20160913` contains Xoroshito128+ code.
 
 ## On Xorshift128+ parameter change
 
