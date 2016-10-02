@@ -16,4 +16,4 @@ See <http://v8project.blogspot.co.uk/2015/12/theres-mathrandom-and-then-theres.h
 
 ## LICENSE
 
-CC0 / Public Domain.
+Public Domain. See `UNLICENSE`.
