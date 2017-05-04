@@ -54,7 +54,7 @@ void jump(void) {
 	uint64_t s1 = 0;
 	for(int i = 0; i < sizeof JUMP / sizeof *JUMP; i++)
 		for(int b = 0; b < 64; b++) {
-			if (JUMP[i] & 1ULL << b) {
+			if (JUMP[i] & UINT64_C(1) << b) {
 				s0 ^= s[0];
 				s1 ^= s[1];
 			}
