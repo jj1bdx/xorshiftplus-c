@@ -48,7 +48,7 @@ void jump(void) {
 	uint64_t t[16] = { 0 };
 	for(int i = 0; i < sizeof JUMP / sizeof *JUMP; i++)
 		for(int b = 0; b < 64; b++) {
-			if (JUMP[i] & 1ULL << b)
+			if (JUMP[i] & UINT64_C(1) << b)
 				for(int j = 0; j < 16; j++)
 					t[j] ^= s[(j + p) & 15];
 			next();
