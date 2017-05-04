@@ -20,8 +20,7 @@ See <http://creativecommons.org/publicdomain/zero/1.0/>. */
    a mild amount of parallelism; otherwise, use a xorshift1024* generator.
 
    Note that the lowest bit of this generator is an LSFR, and thus it is
-   slightly less random than the other bits. We suggest to use a sign test
-   to extract a random Boolean value.
+   slightly less random than the other bits.
 
    The state must be seeded so that the lower 58 bits of s[0] and s[1]
    are not all zeroes, and the upper 6 bits are zeroes. If you have a
@@ -53,7 +52,7 @@ void jump(void) {
 	uint64_t s1 = 0;
 	for(int i = 0; i < sizeof JUMP / sizeof *JUMP; i++)
 		for(int b = 0; b < 64; b++) {
-			if (JUMP[i] & 1ULL << b) {
+			if (JUMP[i] & UINT64_C(1) << b) {
 				s0 ^= s[0];
 				s1 ^= s[1];
 			}
